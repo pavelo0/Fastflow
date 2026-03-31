@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npm run --prefix frontend lint",
+    "typecheck": "npm run --prefix frontend typecheck",
+    "test": "npm run --prefix frontend test",
+    "check": "npm run -s lint && npm run -s typecheck && npm run -s test"
+  },
+  "lint-staged": {
+    "frontend/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "npm --prefix frontend run -s format --"
+    ],
+    "frontend/**/*.{ts,tsx}": [
+      "npm --prefix frontend run -s lint:fix --"
+    ]
+  }
+}
