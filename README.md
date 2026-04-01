@@ -1,4 +1,4 @@
-# FastFlow / PostFlow
+# PostFlow
 
 Monorepo for **PostFlow** — a Telegram post scheduler (frontend + backend +
 docs).
