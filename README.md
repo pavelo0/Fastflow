@@ -1,48 +1,49 @@
 # FastFlow / PostFlow
 
-Монорепозиторий для **PostFlow** — планировщика Telegram-постов (frontend +
-backend + docs).
+Monorepo for **PostFlow** — a Telegram post scheduler (frontend + backend + docs).
 
 ---
 
-## Быстрый старт
+## Quick start
 
-### Требования
+### Requirements
 
-- Node.js + npm (рекомендуется LTS)
+- Node.js + npm (LTS recommended)
 
-### Установка зависимостей (одной командой)
+### Install dependencies (one command)
 
-Из корня:
+From the repository root:
+
+```bash
+npm run fi
+```
+
+`fi` = **full install**. This command installs dependencies:
+
+- in the root (tooling like husky/lint-staged)
+- in `frontend/`
+- in `backend/` (when the folder exists; if it doesn't — it will be skipped)
+- in `./`
+
+You can also run:
 
 ```bash
 npm install
 ```
 
-Это поставит зависимости:
-
-- в корне (инструменты типа husky/lint-staged)
-- в `frontend/`
-- в `backend/` (когда папка появится; если её нет — будет `skip`)
-- в `./`
-
-Если хочешь запускать явно:
-
-```bash
-npm run install:all
-```
+`npm install` runs the same install flow via `postinstall`.
 
 ---
 
-## Команды
+## Commands
 
-### Проверки
+### Checks
 
 ```bash
 npm run check
 ```
 
-Дополнительно (фронт):
+Additional (frontend):
 
 ```bash
 npm run lint
@@ -52,53 +53,72 @@ npm run test
 
 ---
 
-## Структура репозитория
+## Repository structure
 
-- `frontend/` — React/Vite приложение (UI)
-- `backend/` — NestJS API + очереди (появится/в разработке)
-- `docs/` — продуктовые и технические документы, чеклисты
+- `frontend/` — React/Vite app (UI)
+- `backend/` — NestJS API + queues (planned / WIP)
+- `docs/` — product & technical docs, implementation checklists
 
 ---
 
-## Документация
+## Documentation
 
-Главные документы:
+Key docs:
 
-- `docs/PostFlow_Overview.md` — что за продукт, MVP, стратегия, расходы, roadmap
-- `docs/PostFlow_Tech_Spec.md` — tech spec (API, модули, деплой)
-- `docs/PostFlow_Front_CHECKLIST.md` / `docs/PostFlow_Back_CHECKLIST.md` —
-  чеклисты реализации
+- `docs/PostFlow_Overview.md` — product overview, MVP, strategy, costs, roadmap
+- `docs/PostFlow_Tech_Spec.md` — tech spec (API, modules, deployment)
+- `docs/PostFlow_Front_CHECKLIST.md` / `docs/PostFlow_Back_CHECKLIST.md` — implementation checklists
 
 ---
 
 ## Git conventions
 
-### Коммиты
+### Commits
 
-Рекомендуемый стиль (Conventional Commits):
-
-- `feat: ...`
-- `style: ...`
-- `fix: ...`
-- `docs: ...`
-- `refactor: ...`
-- `config: ...`
-
-Пример:
+We use **Conventional Commits** in a strict format (English only):
 
 ```text
-[feat] add scheduled posts list
+type(scope): description
+```
+
+- **type**: required, lowercase
+- **scope**: optional, lowercase (e.g. `frontend`, `backend`, `docs`, `deps`)
+- **description**: required, short, imperative mood, no trailing period
+
+Supported types:
+
+| Type | When to use |
+| --- | --- |
+| `feat` | new functionality |
+| `fix` | bug fix |
+| `refactor` | refactoring without behavior change |
+| `style` | formatting only (spaces, semicolons, etc.) |
+| `test` | add/update tests |
+| `docs` | documentation only |
+| `chore` | routine tasks (deps, configs, tooling) |
+| `perf` | performance improvements |
+| `ci` | CI/CD pipeline changes |
+| `build` | build system changes |
+| `revert` | revert a previous commit |
+
+Examples:
+
+```text
+feat(frontend): add scheduled posts list
+fix(backend): handle empty webhook payload
+docs: update setup instructions
+chore(deps): bump lint-staged
 ```
 
 ### Pull Requests
 
-- короткое описание “зачем”
-- скриншоты для UI
-- тест-план (как проверить)
+- short “why” description
+- screenshots for UI changes
+- test plan (how to verify)
 
 ---
 
-## ENV / секреты
+## ENV / secrets
 
-- Не коммить `.env*` с реальными ключами
-- Храни пример в `.env.example` (в подпроектах — рядом)
+- Do not commit real `.env*` files with secrets
+- Keep examples in `.env.example` (next to the related subproject)
